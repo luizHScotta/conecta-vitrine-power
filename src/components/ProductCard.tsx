@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface ProductCardProps {
-  id: number;
+  id: string;
   name: string;
   price: number;
   image: string;
-  badge?: string;
+  badge?: string | null;
 }
 
 const ProductCard = ({ name, price, image, badge }: ProductCardProps) => {

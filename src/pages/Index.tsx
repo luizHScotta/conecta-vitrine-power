@@ -1,6 +1,8 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 import productTshirt from "@/assets/product-tshirt.jpg";
 import productJournal from "@/assets/product-journal.jpg";
@@ -9,49 +11,33 @@ import productHoodie from "@/assets/product-hoodie.jpg";
 import productCap from "@/assets/product-cap.jpg";
 import productBottle from "@/assets/product-bottle.jpg";
 
-const products = [
-  {
-    id: 1,
-    name: "Camiseta Fé Ousada",
-    price: 79.90,
-    image: productTshirt,
-    badge: "Novo",
-  },
-  {
-    id: 2,
-    name: "Diário de Gratidão",
-    price: 45.90,
-    image: productJournal,
-  },
-  {
-    id: 3,
-    name: "Pulseira da Fé",
-    price: 29.90,
-    image: productBracelet,
-    badge: "🔥",
-  },
-  {
-    id: 4,
-    name: "Moletom Adoração",
-    price: 149.90,
-    image: productHoodie,
-  },
-  {
-    id: 5,
-    name: "Boné Jovem Gospel",
-    price: 59.90,
-    image: productCap,
-  },
-  {
-    id: 6,
-    name: "Garrafa Motivacional",
-    price: 39.90,
-    image: productBottle,
-    badge: "Top",
-  },
-];
+const imageMap: Record<string, string> = {
+  "/src/assets/product-tshirt.jpg": productTshirt,
+  "/src/assets/product-journal.jpg": productJournal,
+  "/src/assets/product-bracelet.jpg": productBracelet,
+  "/src/assets/product-hoodie.jpg": productHoodie,
+  "/src/assets/product-cap.jpg": productCap,
+  "/src/assets/product-bottle.jpg": productBottle,
+};
 
 const Index = () => {
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .order("created_at", { ascending: true });
+      
+      if (error) throw error;
+      
+      return data.map((product) => ({
+        ...product,
+        image: imageMap[product.image] || product.image,
+        price: Number(product.price),
+      }));
+    },
+  });
   return (
     <div className="min-h-screen">
       <Header />
@@ -72,9 +58,19 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8">
-            {products.map((product) => (
-              <ProductCard key={product.id} {...product} />
-            ))}
+            {isLoading ? (
+              <div className="col-span-full text-center py-12">
+                <p className="text-foreground/70">Carregando produtos...</p>
+              </div>
+            ) : products && products.length > 0 ? (
+              products.map((product) => (
+                <ProductCard key={product.id} {...product} />
+              ))
+            ) : (
+              <div className="col-span-full text-center py-12">
+                <p className="text-foreground/70">Nenhum produto encontrado.</p>
+              </div>
+            )}
           </div>
 
           <div className="mt-12 text-center">

@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
+import { useCart } from "@/contexts/CartContext";
 
 import productTshirt from "@/assets/product-tshirt.jpg";
 import productJournal from "@/assets/product-journal.jpg";
@@ -24,6 +25,7 @@ const imageMap: Record<string, string> = {
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addItem } = useCart();
 
   const { data: product, isLoading } = useQuery({
     queryKey: ["product", id],
@@ -123,7 +125,17 @@ const ProductDetails = () => {
             </div>
 
             <div className="flex gap-4 pt-6">
-              <Button variant="cta" size="lg" className="flex-1 gap-2">
+              <Button 
+                variant="cta" 
+                size="lg" 
+                className="flex-1 gap-2"
+                onClick={() => addItem({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  image: product.image,
+                })}
+              >
                 <ShoppingCart className="h-5 w-5" />
                 Adicionar ao Carrinho
               </Button>

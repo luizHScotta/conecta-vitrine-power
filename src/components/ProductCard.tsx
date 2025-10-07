@@ -2,6 +2,7 @@ import { ShoppingCart, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
   id: string;
@@ -13,6 +14,12 @@ interface ProductCardProps {
 
 const ProductCard = ({ id, name, price, image, badge }: ProductCardProps) => {
   const navigate = useNavigate();
+  const { addItem } = useCart();
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    addItem({ id, name, price, image });
+  };
 
   return (
     <Card className="group overflow-hidden border-border/50 bg-card shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1">
@@ -51,7 +58,12 @@ const ProductCard = ({ id, name, price, image, badge }: ProductCardProps) => {
                 R$ {price.toFixed(2)}
               </span>
             </div>
-            <Button variant="cta" size="sm" className="gap-1">
+            <Button 
+              variant="cta" 
+              size="sm" 
+              className="gap-1"
+              onClick={handleAddToCart}
+            >
               <ShoppingCart className="h-4 w-4" />
               Comprar
             </Button>

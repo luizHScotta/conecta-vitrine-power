@@ -1,9 +1,7 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
 import ProductCard from "@/components/ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
 
 import productTshirt from "@/assets/product-tshirt.jpg";
 import productJournal from "@/assets/product-journal.jpg";
@@ -21,9 +19,7 @@ const imageMap: Record<string, string> = {
   "/src/assets/product-bottle.jpg": productBottle,
 };
 
-const Index = () => {
-  const navigate = useNavigate();
-  
+const Products = () => {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
@@ -41,20 +37,20 @@ const Index = () => {
       }));
     },
   });
+
   return (
     <div className="min-h-screen">
       <Header />
-      <Hero />
       
-      <section id="produtos" className="py-16 md:py-24">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 font-display text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
-              NOSSOS{" "}
+            <h1 className="mb-4 font-display text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
+              TODOS OS{" "}
               <span className="bg-gradient-primary bg-clip-text text-transparent">
                 PRODUTOS
               </span>
-            </h2>
+            </h1>
             <p className="mx-auto max-w-2xl text-lg text-foreground/70">
               Escolha o que combina com você e viva sua fé com autenticidade! 🙌
             </p>
@@ -74,15 +70,6 @@ const Index = () => {
                 <p className="text-foreground/70">Nenhum produto encontrado.</p>
               </div>
             )}
-          </div>
-
-          <div className="mt-12 text-center">
-            <button 
-              onClick={() => navigate("/produtos")}
-              className="text-primary hover:text-primary/80 font-semibold transition-colors"
-            >
-              Ver todos os produtos →
-            </button>
           </div>
         </div>
       </section>
@@ -113,4 +100,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Products;

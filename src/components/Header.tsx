@@ -1,5 +1,6 @@
 import { ShoppingCart, Heart, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -16,12 +17,12 @@ const Header = () => {
           </div>
 
           <nav className="hidden items-center gap-6 md:flex">
-            <a href="#" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+            <Link to="/" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
               Início
-            </a>
-            <a href="#produtos" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
+            </Link>
+            <Link to="/produtos" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
               Produtos
-            </a>
+            </Link>
             <a href="#sobre" className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors">
               Sobre
             </a>

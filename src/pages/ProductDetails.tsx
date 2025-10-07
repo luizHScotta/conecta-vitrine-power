@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart, ArrowLeft } from "lucide-react";
 import Header from "@/components/Header";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 import productTshirt from "@/assets/product-tshirt.jpg";
 import productJournal from "@/assets/product-journal.jpg";
@@ -26,6 +27,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addItem } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const { data: product, isLoading } = useQuery({
     queryKey: ["product", id],
@@ -139,9 +141,14 @@ const ProductDetails = () => {
                 <ShoppingCart className="h-5 w-5" />
                 Adicionar ao Carrinho
               </Button>
-              <Button variant="outline" size="lg" className="gap-2">
-                <Heart className="h-5 w-5" />
-                Favoritar
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="gap-2"
+                onClick={() => toggleFavorite(product.id)}
+              >
+                <Heart className={`h-5 w-5 ${isFavorite(product.id) ? 'fill-current' : ''}`} />
+                {isFavorite(product.id) ? 'Favoritado' : 'Favoritar'}
               </Button>
             </div>
           </div>

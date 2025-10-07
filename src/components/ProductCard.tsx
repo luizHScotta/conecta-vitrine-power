@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 interface ProductCardProps {
   id: string;
@@ -15,10 +16,16 @@ interface ProductCardProps {
 const ProductCard = ({ id, name, price, image, badge }: ProductCardProps) => {
   const navigate = useNavigate();
   const { addItem } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     addItem({ id, name, price, image });
+  };
+
+  const handleToggleFavorite = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    toggleFavorite(id);
   };
 
   return (
@@ -42,8 +49,9 @@ const ProductCard = ({ id, name, price, image, badge }: ProductCardProps) => {
             variant="ghost"
             size="icon"
             className="absolute right-3 bottom-3 h-10 w-10 rounded-full bg-background/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-background hover:scale-110"
+            onClick={handleToggleFavorite}
           >
-            <Heart className="h-5 w-5 text-primary" />
+            <Heart className={`h-5 w-5 ${isFavorite(id) ? 'fill-current text-primary' : 'text-primary'}`} />
           </Button>
         </div>
 

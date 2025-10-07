@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +16,7 @@ import {
 const Header = () => {
   const { totalItems } = useCart();
   const { user, signOut } = useAuth();
+  const { favorites } = useFavorites();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -48,8 +50,18 @@ const Header = () => {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" className="hidden md:flex">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hidden md:flex relative"
+              onClick={() => navigate("/favoritos")}
+            >
               <Heart className="h-5 w-5" />
+              {favorites.size > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground">
+                  {favorites.size}
+                </span>
+              )}
             </Button>
             
             {user ? (

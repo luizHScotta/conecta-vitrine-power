@@ -126,7 +126,7 @@ const ProductDetails = () => {
               </ul>
             </div>
 
-            <div className="flex gap-4 pt-6">
+            <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <Button 
                 variant="cta" 
                 size="lg" 
@@ -144,7 +144,7 @@ const ProductDetails = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="gap-2"
+                className="gap-2 sm:w-auto w-full"
                 onClick={() => toggleFavorite(product.id)}
               >
                 <Heart className={`h-5 w-5 ${isFavorite(product.id) ? 'fill-current' : ''}`} />

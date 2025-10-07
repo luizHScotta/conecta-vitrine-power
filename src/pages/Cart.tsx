@@ -37,14 +37,14 @@ const Cart = () => {
       <Header />
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="mb-12 flex items-center justify-between">
-            <h1 className="font-display text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
+          <div className="mb-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <h1 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground md:text-5xl">
               MEU{" "}
               <span className="bg-gradient-primary bg-clip-text text-transparent">
                 CARRINHO
               </span>
             </h1>
-            <Button variant="outline" onClick={clearCart}>
+            <Button variant="outline" onClick={clearCart} className="w-full sm:w-auto">
               Limpar Carrinho
             </Button>
           </div>
@@ -54,21 +54,21 @@ const Cart = () => {
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="flex gap-4 rounded-lg border border-border bg-card p-4"
+                  className="flex flex-col sm:flex-row gap-4 rounded-lg border border-border bg-card p-4"
                 >
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="h-24 w-24 rounded-md object-cover"
+                    className="h-32 sm:h-24 w-full sm:w-24 rounded-md object-cover"
                   />
-                  <div className="flex flex-1 flex-col justify-between">
+                  <div className="flex flex-1 flex-col justify-between gap-3">
                     <div>
                       <h3 className="font-semibold text-foreground">{item.name}</h3>
                       <p className="text-lg font-bold text-primary">
                         R$ {item.price.toFixed(2)}
                       </p>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-between sm:justify-start gap-4">
                       <div className="flex items-center gap-2">
                         <Button
                           size="icon"
@@ -97,7 +97,7 @@ const Cart = () => {
                       </Button>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right sm:text-right border-t sm:border-t-0 pt-3 sm:pt-0">
                     <p className="text-sm text-foreground/70">Subtotal</p>
                     <p className="text-xl font-bold text-primary">
                       R$ {(item.price * item.quantity).toFixed(2)}

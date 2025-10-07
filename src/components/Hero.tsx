@@ -40,20 +40,20 @@ const Hero = () => {
             </Button>
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-8 text-center">
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 md:gap-8 text-center">
             <div>
-              <p className="text-3xl font-bold text-primary">500+</p>
-              <p className="text-sm text-foreground/70">Produtos</p>
+              <p className="text-2xl md:text-3xl font-bold text-primary">500+</p>
+              <p className="text-xs md:text-sm text-foreground/70">Produtos</p>
             </div>
-            <div className="h-12 w-px bg-border"></div>
+            <div className="hidden sm:block h-12 w-px bg-border"></div>
             <div>
-              <p className="text-3xl font-bold text-primary">2k+</p>
-              <p className="text-sm text-foreground/70">Clientes</p>
+              <p className="text-2xl md:text-3xl font-bold text-primary">2k+</p>
+              <p className="text-xs md:text-sm text-foreground/70">Clientes</p>
             </div>
-            <div className="h-12 w-px bg-border"></div>
+            <div className="hidden sm:block h-12 w-px bg-border"></div>
             <div>
-              <p className="text-3xl font-bold text-primary">4.9★</p>
-              <p className="text-sm text-foreground/70">Avaliação</p>
+              <p className="text-2xl md:text-3xl font-bold text-primary">4.9★</p>
+              <p className="text-xs md:text-sm text-foreground/70">Avaliação</p>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { ShoppingCart, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   id: string;
@@ -10,11 +11,16 @@ interface ProductCardProps {
   badge?: string | null;
 }
 
-const ProductCard = ({ name, price, image, badge }: ProductCardProps) => {
+const ProductCard = ({ id, name, price, image, badge }: ProductCardProps) => {
+  const navigate = useNavigate();
+
   return (
     <Card className="group overflow-hidden border-border/50 bg-card shadow-card hover:shadow-hover transition-all duration-300 hover:-translate-y-1">
       <CardContent className="p-0">
-        <div className="relative aspect-square overflow-hidden bg-muted">
+        <div 
+          className="relative aspect-square overflow-hidden bg-muted cursor-pointer"
+          onClick={() => navigate(`/produto/${id}`)}
+        >
           <img
             src={image}
             alt={name}

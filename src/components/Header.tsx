@@ -1,9 +1,10 @@
-import { ShoppingCart, Heart, User, LogOut } from "lucide-react";
+import { ShoppingCart, Heart, User, LogOut, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useRole } from "@/hooks/useRole";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +18,7 @@ const Header = () => {
   const { totalItems } = useCart();
   const { user, signOut } = useAuth();
   const { favorites } = useFavorites();
+  const { isAdmin } = useRole();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -74,6 +76,15 @@ const Header = () => {
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
                   <DropdownMenuSeparator />
+                  {isAdmin && (
+                    <>
+                      <DropdownMenuItem onClick={() => navigate("/admin")}>
+                        <Settings className="mr-2 h-4 w-4" />
+                        Painel Admin
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                    </>
+                  )}
                   <DropdownMenuItem onClick={handleSignOut}>
                     <LogOut className="mr-2 h-4 w-4" />
                     Sair

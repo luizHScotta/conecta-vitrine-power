@@ -33,7 +33,7 @@ const Header = () => {
               <span className="text-xl font-bold text-primary-foreground">🔥</span>
             </div>
             <h1 className="text-xl font-display font-extrabold tracking-tight text-foreground md:text-2xl">
-              LOJA JOVEM
+              JOVENS MARCO
             </h1>
           </div>
 

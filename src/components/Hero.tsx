@@ -13,7 +13,7 @@ const Hero = () => {
         <div className="mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-block rounded-full bg-primary/20 px-4 py-2 backdrop-blur-sm">
             <span className="text-sm font-bold uppercase tracking-wider text-secondary">
-              🔥 Novos Produtos Toda Semana
+              🔥 Produtos Feitos para Honra e Glória de Deus!
             </span>
           </div>
 
@@ -40,22 +40,6 @@ const Hero = () => {
             </Button>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 md:gap-8 text-center">
-            <div>
-              <p className="text-2xl md:text-3xl font-bold text-primary">500+</p>
-              <p className="text-xs md:text-sm text-foreground/70">Produtos</p>
-            </div>
-            <div className="hidden sm:block h-12 w-px bg-border"></div>
-            <div>
-              <p className="text-2xl md:text-3xl font-bold text-primary">2k+</p>
-              <p className="text-xs md:text-sm text-foreground/70">Clientes</p>
-            </div>
-            <div className="hidden sm:block h-12 w-px bg-border"></div>
-            <div>
-              <p className="text-2xl md:text-3xl font-bold text-primary">4.9★</p>
-              <p className="text-xs md:text-sm text-foreground/70">Avaliação</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
